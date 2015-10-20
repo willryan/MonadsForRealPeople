@@ -54,6 +54,9 @@
     <None Include="Script.fsx" />
     <Compile Include="MaybeOption.fs" />
     <Content Include="packages.config" />
+    <Compile Include="EitherChoice.fs" />
+    <Compile Include="State.fs" />
+    <Compile Include="Reader.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="ExtCore">
