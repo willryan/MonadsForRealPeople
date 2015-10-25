@@ -5,7 +5,4 @@ NUGET
     ExtCore (0.8.45)
     FsUnit (1.3.1.0)
       NUnit (2.6.4)
-    FsUnit.xUnit (1.3.1.0)
-      xunit (1.9.2)
     NUnit (2.6.4)
-    xunit (1.9.2)
