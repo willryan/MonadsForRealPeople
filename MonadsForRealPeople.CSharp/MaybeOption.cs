@@ -97,13 +97,83 @@ namespace MonadsForRealPeople.CSharp
 
         public static string MaybeDoStuff()
         {
-            var result = 
+            var result =
                 from x in MightReturnNothing(5)
                 from y in MightAlsoReturnNothing(x)
                 from z in CouldBeNothingToo(y)
                 select MaybeExample.FinalComputation(x, y, z);
 
             return result.Match(v => v, () => "Nope")();
+        }
+    }
+
+    // example Maybe for showing how not to do it.
+    public class Maybe<T>
+    {
+        public bool IsNothing { get; }
+        private T _value;
+        public T Value
+        {
+            get
+            {
+                if (IsNothing)
+                {
+                    throw new Exception("No Value");
+                }
+                return _value;
+            }
+        }
+        public Maybe(T value)
+        {
+            _value = value;
+            IsNothing = false;
+        }
+        public Maybe()
+        {
+            _value = default(T);
+            IsNothing = true;
+        }
+    }
+
+    public static class Maybe
+    {
+        public static Maybe<T> Just<T>(T value)
+        {
+            return new Maybe<T>(value);
+        }
+
+        public static Maybe<T> Nothing<T>()
+        {
+            return new Maybe<T>();
+        }
+
+        public static Maybe<U> Bind<T,U>(this Maybe<T> m, Func<T,Maybe<U>> f)
+        {
+            if (m.IsNothing)
+            {
+                return Maybe.Nothing<U>();
+            }
+            else
+            {
+                var val = m.Value;
+                /*
+                if (val is int) {
+                    val = (T)(object)((int)((object)val) - 1);
+                }
+                */
+                return f(m.Value);
+            }
+        }
+
+        public static Maybe<T> Return<T>(T value)
+        {
+            var val = value;
+            /*
+            if (val is int) {
+                val = (T)(object)((int)((object)val) - 1);
+            }
+            */
+            return Just(val);
         }
     }
 }
