@@ -1,5 +1,2 @@
 csharp-monad
 xunit
-xunit.assert
-xunit.extensibility.core
-xunit.extensibility.execution
