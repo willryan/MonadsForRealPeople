@@ -3,6 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{7082623D-1D7C-4116-8212-61DC7A3B9820}"
+	ProjectSection(SolutionItems) = preProject
+		paket.dependencies = paket.dependencies
+	EndProjectSection
+EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "MonadsForRealPeople.FSharp", "MonadsForRealPeople.FSharp\MonadsForRealPeople.FSharp.fsproj", "{46077EE8-5A9A-42C7-B51F-233D0E009C56}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonadsForRealPeople.CSharp", "MonadsForRealPeople.CSharp\MonadsForRealPeople.CSharp.csproj", "{2375964D-7C97-486A-9CC4-158681EA987F}"

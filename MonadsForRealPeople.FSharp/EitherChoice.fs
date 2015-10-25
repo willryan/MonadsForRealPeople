@@ -25,7 +25,7 @@ let finalComputationOn x y z =
 
 // either monad
 
-let eitherEither() : Choice<string,string> = 
+let eitherEither() : Choice<string,string> =
   choice {
     let! x = mightFail 5
     let! y = mightAlsoFail x
