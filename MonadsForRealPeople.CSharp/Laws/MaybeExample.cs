@@ -12,13 +12,13 @@ using NUnit.Framework;
 
 namespace MonadsForRealPeople.CSharp.Laws
 {
-    using MFunc = System.Func<decimal, Maybe<decimal>>;
+    using MFunc = System.Func<int, Maybe<int>>;
 
     public static class MaybeFuncs
     {
-        public static Maybe<decimal> Add2(decimal x) => Maybe.Just(x + 2m);
-        public static Maybe<decimal> Add3(decimal x) => Maybe.Just(x + 3m);
-        public static Maybe<decimal> Add5(decimal x) => Maybe.Just(x + 5m);
+        public static Maybe<int> Add2(int x) => Maybe.Just(x + 2);
+        public static Maybe<int> Add3(int x) => Maybe.Just(x + 3);
+        public static Maybe<int> Add5(int x) => Maybe.Just(x + 5);
     }
     [TestFixture]
     public class Test
@@ -26,16 +26,16 @@ namespace MonadsForRealPeople.CSharp.Laws
         [Test]
         public void Laws_LeftIdentity()
         {
-            var m = M.Return(7m);
+            var m = M.Return(7);
             var output = m.Bind(MaybeFuncs.Add2);
-            Assert.AreEqual(MaybeFuncs.Add2(7m), output);
+            Assert.AreEqual(MaybeFuncs.Add2(7), output);
         }
 
         [Test]
         public void Laws_RightIdentity()
         {
-            var input = Maybe.Just(7m);
-            var output = input.Bind(v => M.Return(v));
+            var input = Maybe.Just(7);
+            var output = input.Bind(M.Return);
             Assert.AreEqual(input, output);
         }
 
@@ -54,24 +54,24 @@ namespace MonadsForRealPeople.CSharp.Laws
             MFunc mFinal2 = v =>
                  MaybeFuncs.Add2(v).Bind(sub8); 
 
-            var v1 = mFinal1(7m);
-            var v2 = mFinal2(7m);
+            var v1 = mFinal1(7);
+            var v2 = mFinal2(7);
             Assert.AreEqual(v1, v2);
         }
 
         [Test]
         public void List_LeftIdentity()
         {
-            var m = M.Return(7m);
+            var m = M.Return(7);
             var output = m.Bind(MaybeFuncs.Add2);
-            Assert.AreEqual(MaybeFuncs.Add2(7m), output);
+            Assert.AreEqual(MaybeFuncs.Add2(7), output);
         }
 
         [Test]
         public void List_RightIdentity()
         {
             var input = Maybe.Just(7m);
-            var output = input.Bind(v => M.Return(v));
+            var output = input.Bind(M.Return);
             Assert.AreEqual(input, output);
         }
 
@@ -90,8 +90,8 @@ namespace MonadsForRealPeople.CSharp.Laws
             MFunc mFinal2 = v =>
                  MaybeFuncs.Add2(v).Bind(sub8); 
 
-            var v1 = mFinal1(7m);
-            var v2 = mFinal2(7m);
+            var v1 = mFinal1(7);
+            var v2 = mFinal2(7);
             Assert.AreEqual(v1, v2);
         }
     }

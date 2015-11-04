@@ -1,8 +1,8 @@
 ﻿module MaybeOption
 
 open ExtCore.Control
-open FsUnit.Xunit
-open Xunit
+open FsUnit
+open NUnit.Framework
 
 // setup
 let mightReturnNothing v =
@@ -34,7 +34,8 @@ let maybeDoStuff() =
   }
 
 // test
+[<TestFixture>]
 type ``test maybe``() =
-  [<Fact>]
+  [<Test>]
   member x.``maybe works``() =
     maybeDoStuff() |> should equal "Some 2 [1 ; 2] OneTwoPunch"

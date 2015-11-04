@@ -1,7 +1,7 @@
 ﻿module Reader
 
-open FsUnit.Xunit
-open Xunit
+open FsUnit
+open NUnit.Framework
 open ExtCore.Control
 open System
 
@@ -32,8 +32,9 @@ let getSomeNumbers() =
   } 
 
 // test
+[<TestFixture>]
 type ``test reader``() =
-  [<Fact>]
+  [<Test>]
   member x.``reader works``() =
     getSomeNumbers() |> should equal 
       [

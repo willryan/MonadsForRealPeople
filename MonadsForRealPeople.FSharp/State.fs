@@ -1,14 +1,14 @@
 ﻿module State
 
-open FsUnit.Xunit
-open Xunit
+open FsUnit
+open NUnit.Framework
 open ExtCore.Control
 open System
 
 // setup
-let randGen seed =
+let randGen maxValue seed =
   let rand = new Random(seed)
-  let nextValue = rand.NextDouble()
+  let nextValue = rand.NextDouble() * maxValue
   let nextSeed = rand.Next()
   nextValue, nextSeed
 
@@ -17,17 +17,18 @@ let randGen seed =
 let stateful() = 
   let f = 
     state {
-      let! rand1 = randGen
-      let! rand2 = randGen
-      let! rand3 = randGen
+      let! rand1 = randGen 10.0
+      let! rand2 = randGen 25.0
+      let! rand3 = randGen 400.0
       return [rand1 ; rand2 ; rand3]
     } 
   fst <| f 500
 
 
 // test
+[<TestFixture>]
 type ``test state``() =
-  [<Fact>]
+  [<Test>]
   member x.``state works``() =
     stateful() |> should equal [1. ; 2. ; 3.]
 

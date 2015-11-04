@@ -1,7 +1,7 @@
 ﻿module EitherChoice
 
-open FsUnit.Xunit
-open Xunit
+open FsUnit
+open NUnit.Framework
 open ExtCore.Control
 
 // setup
@@ -34,7 +34,8 @@ let eitherEither() : Choice<string,string> =
   }
 
 // test
+[<TestFixture>]
 type ``test either``() =
-  [<Fact>]
+  [<Test>]
   member x.``either works``() =
     eitherEither() |> should equal "Some 2 [1 ; 2] OneTwoPunch"
