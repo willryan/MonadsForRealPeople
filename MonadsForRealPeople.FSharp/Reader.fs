@@ -7,13 +7,16 @@ open System
 
 // setup
 type Name = Name of string
-type PhoneNumber = PhoneNumber of string
+type PhoneNumber =
+  | PhoneNumber of string
+with
+  override x.ToString() = sprintf "%A" x
 
 let lookup name phonebook =
   Map.find name phonebook
 
 let thebook =
-  Map.ofList 
+  Map.ofList
     [
       (Name "Jenny", PhoneNumber "616-161-9000")
       (Name "Alice", PhoneNumber "800-333-1289")
@@ -28,18 +31,17 @@ let getSomeNumbers() =
     let! num1 = lookup <| Name "Joe"
     let! num2 = lookup <| Name "Jenny"
     let! num3 = lookup <| Name "Phil"
-    return [num1, num2, num3]
-  } 
+    return [num1 ; num2 ; num3]
+  }
 
 // test
 [<TestFixture>]
 type ``test reader``() =
   [<Test>]
   member x.``reader works``() =
-    getSomeNumbers() |> should equal 
+    getSomeNumbers() |> should equal
       [
         PhoneNumber "231-770-8499"
         PhoneNumber "616-161-9000"
         PhoneNumber "608-812-4490"
       ]
-

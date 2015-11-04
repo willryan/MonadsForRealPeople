@@ -21,11 +21,11 @@ let couldBeNothingToo v =
   | _ -> None
 
 let finalComputationOn x y z =
-  sprintf "%A %A %A" x y z
+  sprintf "%s %A %s" x y z
 
 // maybe monad
 
-let maybeDoStuff() = 
+let maybeDoStuff() =
   maybe {
     let! x = mightReturnNothing 5
     let! y = mightAlsoReturnNothing x
@@ -38,4 +38,4 @@ let maybeDoStuff() =
 type ``test maybe``() =
   [<Test>]
   member x.``maybe works``() =
-    maybeDoStuff() |> should equal "Some 2 [1 ; 2] OneTwoPunch"
+    maybeDoStuff() |> should equal (Some "2 [1; 2] OneTwoPunch")

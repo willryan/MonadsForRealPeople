@@ -21,7 +21,7 @@ let couldFailToo v =
   | _ -> Choice.failwith "Knockout"
 
 let finalComputationOn x y z =
-  sprintf "%A %A %A" x y z
+  sprintf "%s %A %s" x y z
 
 // either monad
 
@@ -38,4 +38,4 @@ let eitherEither() : Choice<string,string> =
 type ``test either``() =
   [<Test>]
   member x.``either works``() =
-    eitherEither() |> should equal "Some 2 [1 ; 2] OneTwoPunch"
+    eitherEither() |> Choice.get |> should equal "2 [1; 2] OneTwoPunch"

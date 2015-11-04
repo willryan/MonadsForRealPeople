@@ -14,14 +14,14 @@ let randGen maxValue seed =
 
 // either monad
 
-let stateful() = 
-  let f = 
+let stateful() =
+  let f =
     state {
       let! rand1 = randGen 10.0
       let! rand2 = randGen 25.0
       let! rand3 = randGen 400.0
       return [rand1 ; rand2 ; rand3]
-    } 
+    }
   fst <| f 500
 
 
@@ -30,5 +30,8 @@ let stateful() =
 type ``test state``() =
   [<Test>]
   member x.``state works``() =
-    stateful() |> should equal [1. ; 2. ; 3.]
-
+    let lst = stateful() |> Array.ofList
+    lst |> should haveLength 3
+    lst.[0] |> should lessThanOrEqualTo 10.0
+    lst.[1] |> should lessThanOrEqualTo 25.0
+    lst.[2] |> should lessThanOrEqualTo 400.0
